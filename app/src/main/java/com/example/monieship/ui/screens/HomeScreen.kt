@@ -2,7 +2,9 @@ package com.example.monieship.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,6 +41,7 @@ import com.example.monieship.R
 import com.example.monieship.composables.AppBottomNavigationBar
 import com.example.monieship.composables.AppSearchBar
 import com.example.monieship.composables.TrackingCard
+import com.example.monieship.navigation.Screen
 import com.example.monieship.ui.theme.AppPurple
 import com.example.monieship.ui.theme.DarkGray
 
@@ -48,7 +52,7 @@ import com.example.monieship.ui.theme.DarkGray
 @Composable
 fun HomeScreen(navController: NavController) {
     Scaffold(
-        topBar = {  HomeHeader() },
+        topBar = { HomeHeader({ navController.navigate(Screen.Search.route) }) },
         bottomBar = { AppBottomNavigationBar(navController = navController)  }
     ) { paddingValues ->
         Column(
@@ -66,7 +70,7 @@ fun HomeScreen(navController: NavController) {
 }
 
 @Composable
-fun HomeHeader() {
+fun HomeHeader(navigateToSearch: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -133,10 +137,19 @@ fun HomeHeader() {
                 )
             }
         }
-
         Spacer(modifier = Modifier.height(24.dp))
 
-        AppSearchBar(hint = "Enter the receipt number ...")
+        Box {
+            AppSearchBar(
+                modifier = Modifier.pointerInput(Unit) { },
+                hint = "Enter the receipt number ..."
+            )
+            Box(
+                modifier = Modifier
+                    .matchParentSize()
+                    .clickable { navigateToSearch() }
+            )
+        }
     }
 }
 
@@ -144,5 +157,5 @@ fun HomeHeader() {
 @Preview
 @Composable
 fun HomeHeaderPreview(){
-    HomeHeader()
+    HomeHeader(){}
 }
