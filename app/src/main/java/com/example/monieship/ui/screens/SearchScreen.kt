@@ -123,7 +123,7 @@ fun ShipmentTrackerScreen(
                         exit = fadeOut() + slideOutHorizontally()
                     ) {
                         ShipmentItem(shipment = shipment)
-                        if (index < shipments.lastIndex) {
+                        if (index < shipments.lastIndex + 1) {
                             HorizontalDivider(
                                 color = Color.LightGray.copy(alpha = 0.5f),
                                 thickness = 0.8.dp,

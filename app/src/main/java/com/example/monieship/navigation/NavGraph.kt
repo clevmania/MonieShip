@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.monieship.ui.screens.HomeScreen
 import com.example.monieship.ui.screens.SearchScreen
+import com.example.monieship.ui.screens.ShipmentHistoryScreen
 
 /**
  * @author by Lawrence on 8/8/25.
