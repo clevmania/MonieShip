@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.monieship.ui.screens.CalculateScreen
+import com.example.monieship.ui.screens.EstimatedAmountScreen
 import com.example.monieship.ui.screens.HomeScreen
 import com.example.monieship.ui.screens.SearchScreen
 import com.example.monieship.ui.screens.ShipmentHistoryScreen
