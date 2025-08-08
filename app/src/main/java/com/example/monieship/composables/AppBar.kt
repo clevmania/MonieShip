@@ -48,7 +48,8 @@ import com.example.monieship.ui.theme.TextGray
 fun AppSearchBar(
     hint: String,
     modifier: Modifier = Modifier,
-    query: String, onQueryChanged: (String) -> Unit
+    query: String = "",
+    onQueryChanged: (String) -> Unit = {}
 ) {
     TextField(
         value = query,
