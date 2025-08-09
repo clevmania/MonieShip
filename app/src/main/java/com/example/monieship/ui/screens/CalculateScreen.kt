@@ -43,10 +43,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.monieship.R
 import com.example.monieship.ui.component.AppTopBar
 import com.example.monieship.ui.theme.AppOrange
 import com.example.monieship.ui.theme.LightGrey
@@ -129,7 +131,7 @@ fun PackagingDropDown(
                 modifier = Modifier.fillMaxWidth(),
                 leadingIcon = {
                     Icon(
-                        Icons.Outlined.Info,
+                        ImageVector.vectorResource(R.drawable.ic_package),
                         contentDescription = "Packaging",
                         tint = Color.Gray
                     )
@@ -272,21 +274,21 @@ fun CalculateScreen(
                                 value = senderLocation,
                                 onValueChange = { senderLocation = it },
                                 placeholder = "Sender location",
-                                icon = Icons.Outlined.Favorite
+                                icon = ImageVector.vectorResource(R.drawable.ic_unarchive)
                             )
                             Spacer(Modifier.height(12.dp))
                             InfoTextField(
                                 value = receiverLocation,
                                 onValueChange = { receiverLocation = it },
                                 placeholder = "Receiver location",
-                                icon = Icons.Outlined.Done
+                                icon = ImageVector.vectorResource(R.drawable.ic_archive)
                             )
                             Spacer(Modifier.height(12.dp))
                             InfoTextField(
                                 value = approxWeight,
                                 onValueChange = { approxWeight = it },
                                 placeholder = "Approx weight",
-                                icon = Icons.Outlined.Search
+                                icon = ImageVector.vectorResource(R.drawable.ic_scale)
                             )
                         }
                     }
