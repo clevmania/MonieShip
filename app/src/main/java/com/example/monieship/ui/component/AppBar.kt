@@ -64,7 +64,7 @@ fun AppSearchBar(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_search),
+                    painter = painterResource(id = R.drawable.ic_split_scene_up),
                     contentDescription = "Scan Icon",
                     tint = Color.White
                 )
