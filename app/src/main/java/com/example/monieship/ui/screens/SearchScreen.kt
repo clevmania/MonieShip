@@ -1,10 +1,13 @@
 package com.example.monieship.ui.screens
 
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -33,7 +36,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -53,15 +60,19 @@ import com.example.monieship.ui.theme.LightGrey
 import com.example.monieship.ui.theme.roboto
 import com.example.monieship.viewmodel.PackageInfo
 import com.example.monieship.viewmodel.ShipmentViewModel
+import kotlinx.coroutines.delay
 
 /**
  * @author by Lawrence on 8/8/25.
  * for MonieShip
  */
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun SearchScreen(
     onBackHome: () -> Unit,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
     viewModel: ShipmentViewModel = viewModel()
 ){
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
@@ -86,11 +97,19 @@ fun SearchScreen(
                     )
                 }
 
-                AppSearchBar(
-                    hint = "",
-                    query = searchQuery,
-                    onQueryChanged = { viewModel.onSearchQueryChange(it) }
-                )
+                with(sharedTransitionScope){
+                    AppSearchBar(
+                        hint = "",
+                        modifier = Modifier
+                            .sharedElement(
+                                sharedTransitionScope.rememberSharedContentState(key = "bar"),
+                                animatedVisibilityScope = animatedContentScope
+                            ),
+                        query = searchQuery,
+                        onQueryChanged = { viewModel.onSearchQueryChange(it) }
+                    )
+                }
+
             }
 
         },
@@ -103,8 +122,18 @@ fun SearchScreen(
 @Composable
 fun ShipmentTrackerScreen(
     paddingValues: PaddingValues,
-    shipments: List<PackageInfo>
+    shipments: List<PackageInfo>,
 ) {
+
+    var visibleItems by remember { mutableStateOf(emptySet<String>()) }
+
+    LaunchedEffect(shipments) {
+        visibleItems = emptySet()
+        shipments.forEachIndexed { index, shipment ->
+            delay(100L * index)
+            visibleItems = visibleItems + shipment.trackingNumber
+        }
+    }
 
     Surface(
         color = Color(0xFFF5F5F5)
@@ -120,17 +149,29 @@ fun ShipmentTrackerScreen(
             LazyColumn {
                 itemsIndexed(shipments) { index, shipment ->
                     AnimatedVisibility(
-                        visible = true,
-                        enter = fadeIn() + slideInVertically(),
-                        exit = fadeOut() + slideOutHorizontally()
+                        visible = shipment.trackingNumber in visibleItems,
+                        enter = fadeIn(animationSpec = tween(500)) +
+                                slideInVertically(
+                                    initialOffsetY = { 40 },
+                                    animationSpec = tween(500)
+                                ),
+                        exit = fadeOut(animationSpec = tween(200))
                     ) {
-                        ShipmentItem(shipment = shipment)
-                        if (index < shipments.lastIndex + 1) {
-                            HorizontalDivider(
-                                color = Color.LightGray.copy(alpha = 0.5f),
-                                thickness = 0.8.dp,
-                                modifier = Modifier.padding(horizontal = 16.dp)
+                        Column(
+                            modifier = Modifier.animateItem(
+                                fadeInSpec = null,
+                                fadeOutSpec = null,
+                                placementSpec = tween(durationMillis = 500)
                             )
+                        ) {
+                            ShipmentItem(shipment = shipment)
+                            if (index < shipments.lastIndex) {
+                                HorizontalDivider(
+                                    color = Color.LightGray.copy(alpha = 0.5f),
+                                    thickness = 0.8.dp,
+                                    modifier = Modifier.padding(horizontal = 16.dp)
+                                )
+                            }
                         }
                     }
                 }

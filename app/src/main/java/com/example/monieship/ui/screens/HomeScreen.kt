@@ -1,5 +1,8 @@
 package com.example.monieship.ui.screens
 
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -46,7 +49,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.monieship.R
 import com.example.monieship.model.Vehicle
 import com.example.monieship.ui.component.AppBottomNavigationBar
@@ -63,10 +65,22 @@ import com.example.monieship.ui.theme.roboto
  * @author by Lawrence on 8/8/25.
  * for MonieShip
  */
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(
+    navController: NavController,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
+) {
     Scaffold(
-        topBar = { HomeHeader { navController.navigate(Screen.Search.route) } },
+        topBar = {
+            HomeHeader(
+                sharedTransitionScope,
+                animatedContentScope
+            ) {
+                navController.navigate(Screen.Search.route)
+            }
+        },
         bottomBar = { AppBottomNavigationBar(navController = navController)  },
         containerColor = LightGrey
     ) { paddingValues ->
@@ -88,8 +102,13 @@ fun HomeScreen(navController: NavController) {
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun HomeHeader(navigateToSearch: () -> Unit) {
+fun HomeHeader(
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
+    navigateToSearch: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -160,16 +179,23 @@ fun HomeHeader(navigateToSearch: () -> Unit) {
         }
         Spacer(modifier = Modifier.height(24.dp))
 
-        Box {
-            AppSearchBar(
-                modifier = Modifier.pointerInput(Unit) { },
-                hint = "Enter the receipt number..."
-            )
-            Box(
-                modifier = Modifier
-                    .matchParentSize()
-                    .clickable { navigateToSearch() }
-            )
+        with(sharedTransitionScope){
+            Box {
+                AppSearchBar(
+                    modifier = Modifier
+                        .sharedElement(
+                            sharedTransitionScope.rememberSharedContentState(key = "bar"),
+                            animatedVisibilityScope = animatedContentScope
+                        )
+                        .pointerInput(Unit) { },
+                    hint = "Enter the receipt number..."
+                )
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clickable { navigateToSearch() }
+                )
+            }
         }
     }
 }
@@ -249,19 +275,6 @@ fun VehicleCard(vehicle: Vehicle) {
             )
         }
     }
-}
-
-
-@Preview
-@Composable
-fun HomeHeaderPreview(){
-    HomeHeader(){}
-}
-
-@Preview
-@Composable
-fun HomeScreenPreview(){
-    HomeScreen(rememberNavController())
 }
 
 @Preview
