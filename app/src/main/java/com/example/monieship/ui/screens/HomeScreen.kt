@@ -85,7 +85,7 @@ fun HomeHeader(navigateToSearch: () -> Unit) {
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_placeholder),
+                    painter = painterResource(id = R.drawable.img_male_avatar),
                     contentDescription = "Profile Picture",
                     modifier = Modifier
                         .size(48.dp)
@@ -95,7 +95,7 @@ fun HomeHeader(navigateToSearch: () -> Unit) {
                 Column {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_placeholder),
+                            painter = painterResource(id = R.drawable.ic_near_me),
                             contentDescription = null,
                             tint = Color.White.copy(alpha = 0.8f),
                             modifier = Modifier.size(16.dp)
