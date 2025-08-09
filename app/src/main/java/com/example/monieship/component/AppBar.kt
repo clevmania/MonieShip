@@ -1,4 +1,4 @@
-package com.example.monieship.composables
+package com.example.monieship.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

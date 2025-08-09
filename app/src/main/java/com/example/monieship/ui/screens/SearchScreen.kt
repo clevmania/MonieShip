@@ -46,9 +46,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.example.monieship.R
-import com.example.monieship.composables.AppSearchBar
+import com.example.monieship.component.AppSearchBar
 import com.example.monieship.ui.theme.AppPurple
 import com.example.monieship.ui.viewmodel.PackageInfo
 import com.example.monieship.ui.viewmodel.ShipmentViewModel
