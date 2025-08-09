@@ -38,9 +38,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.monieship.R
-import com.example.monieship.component.AppBottomNavigationBar
-import com.example.monieship.component.AppSearchBar
-import com.example.monieship.component.TrackingCard
+import com.example.monieship.ui.component.AppBottomNavigationBar
+import com.example.monieship.ui.component.AppSearchBar
+import com.example.monieship.ui.component.TrackingCard
 import com.example.monieship.navigation.Screen
 import com.example.monieship.ui.theme.AppPurple
 import com.example.monieship.ui.theme.DarkGray

@@ -1,4 +1,4 @@
-package com.example.monieship.ui.viewmodel
+package com.example.monieship.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
