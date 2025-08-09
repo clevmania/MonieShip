@@ -189,7 +189,7 @@ fun ShipmentHistoryCard(item: ShipmentHistoryItem) {
 
 
 @Composable
-fun ShipmentHistoryScreen(navController: NavController) {
+fun ShipmentHistoryScreen(onBackClick: ()-> Unit) {
     val filterTabs = listOf("All", "Completed", "In progress", "Pending")
     var selectedTabIndex by remember { mutableIntStateOf(0) }
 
@@ -206,7 +206,7 @@ fun ShipmentHistoryScreen(navController: NavController) {
         topBar = {
             Column(modifier = Modifier.background(AppPurple)) {
                 AppTopBar(title = "Shipment history") {
-                    navController.popBackStack()
+                    onBackClick()
                 }
                 ScrollableTabRow(
                     selectedTabIndex = selectedTabIndex,
@@ -269,6 +269,6 @@ fun ShipmentHistoryScreen(navController: NavController) {
 @Composable
 fun ShipmentHistoryScreenPreview() {
     MaterialTheme {
-        ShipmentHistoryScreen(rememberNavController())
+        ShipmentHistoryScreen{}
     }
 }

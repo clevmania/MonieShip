@@ -34,16 +34,25 @@ fun NavGraph(navController: NavHostController) {
             popEnterTransition = { fadeIn() + slideInVertically(initialOffsetY = { it / 8 }) },
             popExitTransition = { fadeOut() + slideOutVertically(targetOffsetY = { it / 8 }) }
         ) {
-            SearchScreen(navController = navController)
+            SearchScreen(onBackHome = { navController.popBackStack() })
         }
         composable(route = Screen.ShipmentHistory.route) {
-            ShipmentHistoryScreen(navController = navController)
+            ShipmentHistoryScreen{ navController.popBackStack() }
         }
         composable(route = Screen.Calculate.route) {
-            CalculateScreen(navController = navController)
+            CalculateScreen(
+                onCalculateClick = {
+                    navController.navigate(Screen.EstimatedAmount.route)
+                },
+                onBackClick =  {
+                    navController.popBackStack(Screen.Home.route, inclusive = false)
+                }
+            )
         }
         composable(route = Screen.EstimatedAmount.route) {
-            EstimatedAmountScreen(navController = navController)
+            EstimatedAmountScreen {
+                navController.navigate(Screen.Home.route)
+            }
         }
     }
 }

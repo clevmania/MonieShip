@@ -60,7 +60,7 @@ import com.example.monieship.ui.viewmodel.ShipmentViewModel
 
 @Composable
 fun SearchScreen(
-    navController: NavController,
+    onBackHome: () -> Unit,
     viewModel: ShipmentViewModel = viewModel()
 ){
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
@@ -77,7 +77,7 @@ fun SearchScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                IconButton(onClick = {navController.popBackStack() }) {
+                IconButton(onClick = onBackHome) {
                     Icon(
                         Icons.Default.ArrowBack,
                         contentDescription = "Back",
