@@ -57,6 +57,7 @@ import com.example.monieship.ui.theme.AppPurple
 import com.example.monieship.ui.theme.DarkGray
 import com.example.monieship.ui.theme.LightGrey
 import com.example.monieship.ui.theme.TextGray
+import com.example.monieship.ui.theme.roboto
 
 /**
  * @author by Lawrence on 8/8/25.
@@ -122,7 +123,8 @@ fun HomeHeader(navigateToSearch: () -> Unit) {
                         Text(
                             text = "Your location",
                             color = Color.White.copy(alpha = 0.8f),
-                            fontSize = 12.sp
+                            fontSize = 12.sp,
+                            fontFamily = roboto
                         )
                     }
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -130,7 +132,8 @@ fun HomeHeader(navigateToSearch: () -> Unit) {
                             text = "Wertheimer, Illinois",
                             color = Color.White,
                             fontWeight = FontWeight.Bold,
-                            fontSize = 16.sp
+                            fontSize = 16.sp,
+                            fontFamily = roboto
                         )
                         Icon(
                             imageVector = Icons.Default.KeyboardArrowDown,
@@ -177,6 +180,7 @@ fun Header(title: String){
         text = title,
         style = MaterialTheme.typography.headlineSmall,
         fontWeight = FontWeight.Bold,
+        fontFamily = roboto
     )
 }
 
@@ -221,13 +225,15 @@ fun VehicleCard(vehicle: Vehicle) {
                     text = vehicle.name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
-                    color = DarkGray
+                    color = DarkGray,
+                    fontFamily = roboto
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = vehicle.description,
                     color = TextGray,
-                    fontSize = 14.sp
+                    fontSize = 14.sp,
+                    fontFamily = roboto
                 )
             }
 

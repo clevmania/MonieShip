@@ -44,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,6 +53,7 @@ import com.example.monieship.R
 import com.example.monieship.ui.component.AppTopBar
 import com.example.monieship.ui.theme.AppOrange
 import com.example.monieship.ui.theme.LightGrey
+import com.example.monieship.ui.theme.roboto
 
 /**
  * @author by Lawrence on 8/8/25.
@@ -65,14 +67,16 @@ fun SectionHeader(title: String, subtitle: String? = null) {
             text = title,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+            color = Color.Black,
+            fontFamily = roboto
         )
         if (subtitle != null) {
             Text(
                 modifier = Modifier.padding(top = 4.dp),
                 text = subtitle,
                 fontSize = 14.sp,
-                color = Color.Gray
+                color = Color.Gray,
+                fontFamily = roboto
             )
         }
     }
@@ -90,7 +94,7 @@ fun InfoTextField(
         value = value,
         onValueChange = onValueChange,
         modifier = Modifier.fillMaxWidth(),
-        placeholder = { Text(placeholder, color = Color.Gray) },
+        placeholder = { Text(placeholder, color = Color.Gray, fontFamily = roboto) },
         leadingIcon = { Icon(icon, contentDescription = null, tint = Color.Gray) },
         shape = RoundedCornerShape(12.dp),
         colors = TextFieldDefaults.textFieldColors(
@@ -100,7 +104,8 @@ fun InfoTextField(
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent
         ),
-        singleLine = true
+        singleLine = true,
+        textStyle = TextStyle(fontFamily = roboto)
     )
 }
 
@@ -143,7 +148,8 @@ fun PackagingDropDown(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent
-                )
+                ),
+                textStyle = TextStyle(fontFamily = roboto)
             )
             ExposedDropdownMenu(
                 expanded = expanded,
@@ -151,7 +157,7 @@ fun PackagingDropDown(
             ) {
                 options.forEach { option ->
                     DropdownMenuItem(
-                        text = { Text(text = option) },
+                        text = { Text(text = option, fontFamily = roboto) },
                         onClick = {
                             onOptionSelected(option)
                             expanded = false
@@ -181,7 +187,7 @@ fun CategoryChips(
             FilterChip(
                 onClick = { onCategorySelected(category) },
                 label = {
-                    Text(category)
+                    Text(category, fontFamily = roboto)
                 },
                 selected = isSelected,
                 leadingIcon = if (isSelected) {
@@ -245,7 +251,8 @@ fun CalculateScreen(
                     text = "Calculate",
                     color = Color.White,
                     fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = roboto
                 )
             }
         },

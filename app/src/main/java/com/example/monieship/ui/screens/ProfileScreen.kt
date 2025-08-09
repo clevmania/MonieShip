@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.example.monieship.ui.component.AppTopBar
 import com.example.monieship.ui.theme.AppOrange
 import com.example.monieship.ui.theme.LightGrey
+import com.example.monieship.ui.theme.roboto
 
 /**
  * @author by Lawrence on 8/9/25.
@@ -53,6 +54,7 @@ fun ProfileScreen(
                 text = "Coming Soon",
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
+                fontFamily = roboto
             )
         }
     }

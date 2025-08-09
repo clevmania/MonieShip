@@ -40,6 +40,7 @@ import com.example.monieship.ui.theme.DarkGreen
 import com.example.monieship.ui.theme.LightGreen
 import com.example.monieship.ui.theme.LightPeach
 import com.example.monieship.ui.theme.TextGray
+import com.example.monieship.ui.theme.roboto
 
 /**
  * @author by Lawrence on 8/8/25.
@@ -78,13 +79,15 @@ fun ShipmentInfo(){
                         modifier = Modifier.padding(bottom = 4.dp),
                         text = "Shipment Number",
                         color = TextGray,
-                        fontSize = 12.sp
+                        fontSize = 12.sp,
+                        fontFamily = roboto
                     )
                     Text(
                         text = "NEJ20089934122231",
                         color = Color.Black,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
+                        fontSize = 16.sp,
+                        fontFamily = roboto
                     )
                 }
                 Image(
@@ -146,7 +149,7 @@ fun AddStopCard(onClick: () -> Unit){
             TextButton(onClick = onClick) {
                 Icon(Icons.Default.Add, contentDescription = "Add", tint = AppOrange)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "Add Stop", color = AppOrange, fontWeight = FontWeight.Bold)
+                Text(text = "Add Stop", color = AppOrange, fontWeight = FontWeight.Bold, fontFamily = roboto)
             }
         }
     }

@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -37,6 +38,7 @@ import com.example.monieship.ui.theme.AppOrange
 import com.example.monieship.ui.theme.AppPurple
 import com.example.monieship.ui.theme.AppPurpleLight
 import com.example.monieship.ui.theme.TextGray
+import com.example.monieship.ui.theme.roboto
 
 /**
  * @author by Lawrence on 8/8/25.
@@ -70,7 +72,7 @@ fun AppSearchBar(
                 )
             }
         },
-        placeholder = { Text(hint, color = TextGray) },
+        placeholder = { Text(hint, color = TextGray, fontFamily = roboto) },
         colors = TextFieldDefaults.textFieldColors(
             containerColor = Color.White,
             focusedIndicatorColor = Color.Transparent,
@@ -78,6 +80,7 @@ fun AppSearchBar(
         ),
         singleLine = true,
         shape = RoundedCornerShape(24.dp),
+        textStyle = TextStyle(fontFamily = roboto),
         modifier = modifier.fillMaxWidth()
     )
 }
@@ -93,7 +96,8 @@ fun AppTopBar(
             Text(
                 title,
                 fontWeight = FontWeight.Bold,
-                color = Color.White
+                color = Color.White,
+                fontFamily = roboto
             )
         },
         navigationIcon = {
@@ -135,7 +139,7 @@ fun AppBottomNavigationBar(navController: NavController) {
         items.forEach { item ->
             NavigationBarItem(
                 icon = { Icon(painterResource(id = item.icon), contentDescription = item.label) },
-                label = { Text(item.label) },
+                label = { Text(item.label, fontFamily = roboto) },
                 selected = currentRoute == item.route,
                 onClick = {
                     navController.navigate(item.route) {

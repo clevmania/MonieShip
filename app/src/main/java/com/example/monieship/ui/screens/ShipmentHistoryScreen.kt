@@ -48,6 +48,7 @@ import com.example.monieship.model.ShipmentHistoryItem
 import com.example.monieship.model.ShipmentStatus
 import com.example.monieship.ui.theme.AppPurple
 import com.example.monieship.ui.theme.TextGray
+import com.example.monieship.ui.theme.roboto
 
 /**
  * @author by Lawrence on 8/8/25.
@@ -74,7 +75,8 @@ fun StatusChip(status: ShipmentStatus) {
             text = status.title,
             color = status.contentColor,
             fontSize = 12.sp,
-            fontWeight = FontWeight.Medium
+            fontWeight = FontWeight.Medium,
+            fontFamily = roboto
         )
     }
 }
@@ -98,7 +100,8 @@ fun HistoryTab(
                 Text(
                     text = text,
                     color = if (isSelected) selectedColor else unselectedColor,
-                    fontWeight = if(isSelected) FontWeight.Bold else FontWeight.Normal
+                    fontWeight = if(isSelected) FontWeight.Bold else FontWeight.Normal,
+                    fontFamily = roboto
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Box(
@@ -112,7 +115,8 @@ fun HistoryTab(
                         text = count.toString(),
                         color = Color.White,
                         fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = roboto
                     )
                 }
             }
@@ -146,13 +150,15 @@ fun ShipmentHistoryCard(item: ShipmentHistoryItem) {
                     text = item.arrivalTitle,
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = contentAlpha)
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = contentAlpha),
+                    fontFamily = roboto
                 )
                 Text(
                     text = item.description,
                     fontSize = 14.sp,
                     color = Color.Gray.copy(alpha = contentAlpha),
-                    lineHeight = 20.sp
+                    lineHeight = 20.sp,
+                    fontFamily = roboto
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
@@ -160,7 +166,8 @@ fun ShipmentHistoryCard(item: ShipmentHistoryItem) {
                         text = item.price,
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp,
-                        color = AppPurple
+                        color = AppPurple,
+                        fontFamily = roboto
                     )
                     Box(
                         modifier = Modifier
@@ -171,7 +178,8 @@ fun ShipmentHistoryCard(item: ShipmentHistoryItem) {
                         modifier = Modifier.padding(start = 8.dp),
                         text = item.date,
                         fontSize = 14.sp,
-                        color = Color.DarkGray
+                        color = Color.DarkGray,
+                        fontFamily = roboto
                     )
                 }
             }
@@ -253,7 +261,8 @@ fun ShipmentHistoryScreen(onBackClick: ()-> Unit) {
                     text = "Shipments",
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(bottom = 4.dp)
+                    modifier = Modifier.padding(bottom = 4.dp),
+                    fontFamily = roboto
                 )
             }
             items(allShipments) { shipment ->

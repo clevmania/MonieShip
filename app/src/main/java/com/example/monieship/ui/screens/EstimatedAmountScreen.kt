@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.monieship.R
 import com.example.monieship.ui.theme.AppOrange
+import com.example.monieship.ui.theme.roboto
 
 /**
  * @author by Lawrence on 8/8/25.
@@ -55,7 +56,8 @@ fun MonieShipLogo() {
             text = "MonieShip",
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF5A49AF)
+            color = Color(0xFF5A49AF),
+            fontFamily = roboto
         )
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.ic_delivery_truck_speed),
@@ -75,7 +77,8 @@ fun AmountDetails(amount: Int) {
         Text(
             text = "Total Estimated Amount",
             fontSize = 20.sp,
-            color = Color.DarkGray
+            color = Color.DarkGray,
+            fontFamily = roboto
         )
         Row(
             verticalAlignment = Alignment.Bottom,
@@ -85,13 +88,15 @@ fun AmountDetails(amount: Int) {
                 text = "$$amount",
                 fontSize = 48.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF00A99D)
+                color = Color(0xFF00A99D),
+                fontFamily = roboto
             )
             Text(
                 text = "USD",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF00A99D),
+                fontFamily = roboto,
                 modifier = Modifier.padding(start = 4.dp, bottom = 6.dp)
             )
         }
@@ -100,7 +105,8 @@ fun AmountDetails(amount: Int) {
             fontSize = 14.sp,
             textAlign = TextAlign.Center,
             color = Color.Gray,
-            lineHeight = 20.sp
+            lineHeight = 20.sp,
+            fontFamily = roboto
         )
     }
 }
@@ -157,7 +163,8 @@ fun EstimatedAmountScreen(onBackHome: () -> Unit) {
                     text = "Back to home",
                     color = Color.White,
                     fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = roboto
                 )
             }
         }

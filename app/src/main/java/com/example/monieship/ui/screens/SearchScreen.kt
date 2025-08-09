@@ -50,6 +50,7 @@ import com.example.monieship.R
 import com.example.monieship.ui.component.AppSearchBar
 import com.example.monieship.ui.theme.AppPurple
 import com.example.monieship.ui.theme.LightGrey
+import com.example.monieship.ui.theme.roboto
 import com.example.monieship.viewmodel.PackageInfo
 import com.example.monieship.viewmodel.ShipmentViewModel
 
@@ -168,13 +169,15 @@ fun ShipmentItem(shipment: PackageInfo) {
                 text = shipment.title,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
-                color = Color.Black
+                color = Color.Black,
+                fontFamily = roboto
             )
             Spacer(Modifier.height(4.dp))
             Text(
                 text = "${shipment.trackingNumber} • ${shipment.origin} → ${shipment.destination}",
                 fontSize = 14.sp,
-                color = Color.Gray
+                color = Color.Gray,
+                fontFamily = roboto
             )
         }
     }
