@@ -49,8 +49,17 @@ import com.example.monieship.ui.theme.DarkGray as DarkGray1
 
 @Composable
 fun TrackingCard() {
+    Column {
+        ShipmentInfo()
+        HorizontalDivider(color = TextGray, thickness =  0.2.dp)
+        AddStopCard {  }
+    }
+}
+
+@Composable
+fun ShipmentInfo(){
     Card(
-        colors = CardDefaults.cardColors(containerColor = AppPurpleLight),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
         shape = RoundedCornerShape(
             topStart =  24.dp,
             topEnd = 24.dp
@@ -70,24 +79,24 @@ fun TrackingCard() {
                         modifier = Modifier.padding(bottom = 4.dp),
                         text = "Shipment Number",
                         color = TextGray,
-                        fontSize = 14.sp
+                        fontSize = 12.sp
                     )
                     Text(
                         text = "NEJ20089934122231",
-                        color = AppPurple,
+                        color = Color.Black,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp
+                        fontSize = 16.sp
                     )
                 }
                 Image(
-                    painter = painterResource(id = R.drawable.ic_placeholder),
+                    painter = painterResource(id = R.drawable.ic_truck),
                     contentDescription = "Forklift with boxes",
                     modifier = Modifier.size(48.dp)
                 )
             }
 
             Spacer(modifier = Modifier.height(8.dp))
-            HorizontalDivider(thickness = 2.dp, color = Color.White)
+            HorizontalDivider(thickness = 0.2.dp, color = TextGray)
             Spacer(modifier = Modifier.height(16.dp))
 
             Row(
@@ -133,7 +142,7 @@ fun TrackingCard() {
 @Composable
 fun AddStopCard(onClick: () -> Unit){
     Card(
-        colors = CardDefaults.cardColors(containerColor = AppPurpleLight),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
         shape = RoundedCornerShape(
             bottomStart =  24.dp,
             bottomEnd = 24.dp
@@ -200,9 +209,12 @@ private fun StatusInfo(title: String, value: String, hasDot: Boolean = false) {
 @Preview
 @Composable
 fun TrackingCardPreview(){
-    Column {
-        TrackingCard()
-        AddStopCard(){}
-    }
+    TrackingCard()
+}
 
+
+@Preview
+@Composable
+fun ShipPreview(){
+    ShipmentInfo()
 }

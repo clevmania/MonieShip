@@ -49,6 +49,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.monieship.R
 import com.example.monieship.ui.component.AppSearchBar
 import com.example.monieship.ui.theme.AppPurple
+import com.example.monieship.ui.theme.LightGrey
 import com.example.monieship.viewmodel.PackageInfo
 import com.example.monieship.viewmodel.ShipmentViewModel
 
@@ -91,7 +92,8 @@ fun SearchScreen(
                 )
             }
 
-        }
+        },
+        containerColor = LightGrey
     ) { paddingValues ->
         ShipmentTrackerScreen(paddingValues, shipments)
     }

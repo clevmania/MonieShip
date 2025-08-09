@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.monieship.R
 import com.example.monieship.ui.component.AppBottomNavigationBar
 import com.example.monieship.ui.component.AppSearchBar
@@ -44,6 +46,7 @@ import com.example.monieship.ui.component.TrackingCard
 import com.example.monieship.navigation.Screen
 import com.example.monieship.ui.theme.AppPurple
 import com.example.monieship.ui.theme.DarkGray
+import com.example.monieship.ui.theme.LightGrey
 
 /**
  * @author by Lawrence on 8/8/25.
@@ -52,8 +55,9 @@ import com.example.monieship.ui.theme.DarkGray
 @Composable
 fun HomeScreen(navController: NavController) {
     Scaffold(
-        topBar = { HomeHeader({ navController.navigate(Screen.Search.route) }) },
-        bottomBar = { AppBottomNavigationBar(navController = navController)  }
+        topBar = { HomeHeader { navController.navigate(Screen.Search.route) } },
+        bottomBar = { AppBottomNavigationBar(navController = navController)  },
+        containerColor = LightGrey
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -62,9 +66,9 @@ fun HomeScreen(navController: NavController) {
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            Spacer(modifier = Modifier.height(24.dp))
+            Header("Tracking")
             TrackingCard()
-            Spacer(modifier = Modifier.height(24.dp))
+            Header("Available  Vehicles")
         }
     }
 }
@@ -153,9 +157,25 @@ fun HomeHeader(navigateToSearch: () -> Unit) {
     }
 }
 
+@Composable
+fun Header(title: String){
+    Text(
+        text = title,
+        style = MaterialTheme.typography.headlineSmall,
+        fontWeight = FontWeight.Bold,
+        modifier = Modifier.padding(vertical = 16.dp)
+    )
+}
+
 
 @Preview
 @Composable
 fun HomeHeaderPreview(){
     HomeHeader(){}
+}
+
+@Preview
+@Composable
+fun HomeScreenPreview(){
+    HomeScreen(rememberNavController())
 }
