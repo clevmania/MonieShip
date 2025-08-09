@@ -29,7 +29,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -56,7 +58,7 @@ fun MonieShipLogo() {
             color = Color(0xFF5A49AF)
         )
         Icon(
-            imageVector = Icons.Default.ShoppingCart,
+            imageVector = ImageVector.vectorResource(R.drawable.ic_delivery_truck_speed),
             contentDescription = "Truck Icon",
             tint = Color(0xFFF39237),
             modifier = Modifier.size(36.dp)
