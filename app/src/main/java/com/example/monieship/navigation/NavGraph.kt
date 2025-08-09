@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import com.example.monieship.ui.screens.CalculateScreen
 import com.example.monieship.ui.screens.EstimatedAmountScreen
 import com.example.monieship.ui.screens.HomeScreen
+import com.example.monieship.ui.screens.ProfileScreen
 import com.example.monieship.ui.screens.SearchScreen
 import com.example.monieship.ui.screens.ShipmentHistoryScreen
 
@@ -53,6 +54,11 @@ fun NavGraph(navController: NavHostController) {
             EstimatedAmountScreen {
                 navController.navigate(Screen.Home.route)
             }
+        }
+        composable(route = Screen.Profile.route) {
+            ProfileScreen(
+                onBackClick = { navController.popBackStack() }
+            )
         }
     }
 }
