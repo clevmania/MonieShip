@@ -2,7 +2,7 @@ package com.example.monieship.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val AppPurple = Color(0xFF5A3FE3)
+val AppPurple = Color(0xFF5A49AF)
 val AppPurpleLight = Color(0xFFF0EDFF)
 val AppOrange = Color(0xFFFE9901)
 val TextGray = Color(0xFF9E9E9E)
