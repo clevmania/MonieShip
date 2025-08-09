@@ -6,21 +6,28 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -32,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,6 +48,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.monieship.R
+import com.example.monieship.model.Vehicle
 import com.example.monieship.ui.component.AppBottomNavigationBar
 import com.example.monieship.ui.component.AppSearchBar
 import com.example.monieship.ui.component.TrackingCard
@@ -47,6 +56,7 @@ import com.example.monieship.navigation.Screen
 import com.example.monieship.ui.theme.AppPurple
 import com.example.monieship.ui.theme.DarkGray
 import com.example.monieship.ui.theme.LightGrey
+import com.example.monieship.ui.theme.TextGray
 
 /**
  * @author by Lawrence on 8/8/25.
@@ -67,8 +77,12 @@ fun HomeScreen(navController: NavController) {
                 .verticalScroll(rememberScrollState())
         ) {
             Header("Tracking")
+            Spacer(Modifier.height(16.dp))
             TrackingCard()
+            Spacer(Modifier.height(16.dp))
             Header("Available  Vehicles")
+            Spacer(Modifier.height(16.dp))
+            AvailableVehicles()
         }
     }
 }
@@ -146,7 +160,7 @@ fun HomeHeader(navigateToSearch: () -> Unit) {
         Box {
             AppSearchBar(
                 modifier = Modifier.pointerInput(Unit) { },
-                hint = "Enter the receipt number ..."
+                hint = "Enter the receipt number..."
             )
             Box(
                 modifier = Modifier
@@ -163,8 +177,72 @@ fun Header(title: String){
         text = title,
         style = MaterialTheme.typography.headlineSmall,
         fontWeight = FontWeight.Bold,
-        modifier = Modifier.padding(vertical = 16.dp)
     )
+}
+
+val vehicleList = listOf(
+    Vehicle("Ocean freight", "International", R.drawable.ic_ocean_freight),
+    Vehicle("Cargo freight", "Reliable", R.drawable.ic_cargo_freight),
+    Vehicle("Air freight", "International", R.drawable.ic_air_freight)
+)
+
+
+@Composable
+fun AvailableVehicles() {
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues()
+    ) {
+        items(vehicleList) { vehicle ->
+            VehicleCard(vehicle = vehicle)
+        }
+    }
+}
+
+@Composable
+fun VehicleCard(vehicle: Vehicle) {
+    Card(
+        modifier = Modifier
+            .width(150.dp)
+            .height(180.dp),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 16.dp, start = 16.dp)
+        ) {
+            Column(
+                modifier = Modifier.align(Alignment.TopStart)
+            ) {
+                Text(
+                    text = vehicle.name,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = DarkGray
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = vehicle.description,
+                    color = TextGray,
+                    fontSize = 14.sp
+                )
+            }
+
+            Image(
+                painter = painterResource(id = vehicle.imageRes),
+                contentDescription = vehicle.name,
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.BottomStart,
+                modifier = Modifier
+                    .size(130.dp)
+                    .align(Alignment.BottomEnd)
+                    .offset(x = 12.dp, y = 0.dp)
+            )
+        }
+    }
 }
 
 
@@ -178,4 +256,10 @@ fun HomeHeaderPreview(){
 @Composable
 fun HomeScreenPreview(){
     HomeScreen(rememberNavController())
+}
+
+@Preview
+@Composable
+fun AvailableVehiclePreview(){
+    AvailableVehicles()
 }

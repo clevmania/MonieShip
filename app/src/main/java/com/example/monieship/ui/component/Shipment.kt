@@ -27,20 +27,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.monieship.R
 import com.example.monieship.ui.theme.AppOrange
-import com.example.monieship.ui.theme.AppPurple
-import com.example.monieship.ui.theme.AppPurpleLight
 import com.example.monieship.ui.theme.DarkGreen
 import com.example.monieship.ui.theme.LightGreen
-import com.example.monieship.ui.theme.LightOrange
+import com.example.monieship.ui.theme.LightPeach
 import com.example.monieship.ui.theme.TextGray
-import com.example.monieship.ui.theme.DarkGray as DarkGray1
 
 /**
  * @author by Lawrence on 8/8/25.
@@ -67,11 +66,11 @@ fun ShipmentInfo(){
         modifier = Modifier.fillMaxWidth()
     ) {
         Column(
-            modifier = Modifier.padding(20.dp)
+            modifier = Modifier.padding(16.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.Top,
+                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column {
@@ -91,7 +90,7 @@ fun ShipmentInfo(){
                 Image(
                     painter = painterResource(id = R.drawable.ic_truck),
                     contentDescription = "Forklift with boxes",
-                    modifier = Modifier.size(48.dp)
+                    modifier = Modifier.size(40.dp)
                 )
             }
 
@@ -99,39 +98,30 @@ fun ShipmentInfo(){
             HorizontalDivider(thickness = 0.2.dp, color = TextGray)
             Spacer(modifier = Modifier.height(16.dp))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
+            Column(
+                verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.padding(end = 16.dp)
-                ) {
-                    SenderReceiverIcon(
-                        iconRes = R.drawable.ic_arrow_downward, // Placeholder drawable
-                        backgroundColor = LightOrange
-                    )
-                    Spacer(modifier = Modifier.height(24.dp))
-                    SenderReceiverIcon(
-                        iconRes = R.drawable.ic_arrow_downward, // Placeholder drawable
-                        backgroundColor = LightGreen
-                    )
-                }
-
-                Column(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    AddressInfo("Sender", "Atlanta, 5243")
-                    Spacer(modifier = Modifier.height(32.dp))
-                    AddressInfo("Receiver", "Chicago, 6342")
-                }
-
-                Column(
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    StatusInfo(title = "Time", value = "2 day - 3 days", hasDot = true)
-                    Spacer(modifier = Modifier.height(32.dp))
-                    StatusInfo(title = "Status", value = "Waiting to collect")
-                }
+                InfoDetailRow(
+                    icon = ImageVector.vectorResource(
+                        R.drawable.ic_arrow_upward
+                    ),
+                    iconBgColor = LightPeach,
+                    label1 = "Sender",
+                    value1 = "Atlanta, 5243",
+                    label2 = "Time",
+                    value2 = "2 day - 3 days  ",
+                    isTime = true
+                )
+                InfoDetailRow(
+                    icon = ImageVector.vectorResource(
+                        R.drawable.ic_arrow_downward
+                    ),
+                    iconBgColor = LightGreen,
+                    label1 = "Receiver",
+                    value1 = "Chicago, 6342",
+                    label2 = "Status",
+                    value2 = "Waiting to collect"
+                )
             }
 
             Spacer(modifier = Modifier.height(4.dp))
@@ -163,45 +153,59 @@ fun AddStopCard(onClick: () -> Unit){
 }
 
 @Composable
-private fun SenderReceiverIcon(iconRes: Int, backgroundColor: Color) {
-    Box(
-        modifier = Modifier
-            .size(40.dp)
-            .clip(CircleShape)
-            .background(backgroundColor),
-        contentAlignment = Alignment.Center
+private fun InfoDetailRow(
+    icon: ImageVector,
+    iconBgColor: Color,
+    label1: String,
+    value1: String,
+    label2: String,
+    value2: String,
+    isTime: Boolean = false
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.Top
     ) {
-        Icon(
-            painter = painterResource(id = iconRes),
-            contentDescription = null,
-            tint = Color.Unspecified,
-            modifier = Modifier.size(24.dp)
-        )
-    }
-}
-
-@Composable
-private fun AddressInfo(title: String, address: String) {
-    Column {
-        Text(text = title, fontSize = 14.sp, color = TextGray)
-        Text(text = address, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = DarkGray1)
-    }
-}
-
-@Composable
-private fun StatusInfo(title: String, value: String, hasDot: Boolean = false) {
-    Column {
-        Text(text = title, fontSize = 14.sp, color = TextGray)
         Row(verticalAlignment = Alignment.CenterVertically) {
-            if (hasDot) {
-                Box(
-                    modifier = Modifier
-                        .size(8.dp)
-                        .background(DarkGreen, CircleShape)
+            Box(
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(CircleShape)
+                    .background(iconBgColor),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = label1,
+                    tint = Color.Black,
+                    modifier = Modifier.size(20.dp)
                 )
-                Spacer(modifier = Modifier.width(6.dp))
             }
-            Text(text = value, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = DarkGray1)
+            Spacer(modifier = Modifier.width(12.dp))
+            Column {
+                Text(text = label1, color = Color.Gray, fontSize = 14.sp)
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(text = value1, fontWeight = FontWeight.SemiBold, color = Color.Black)
+            }
+        }
+
+        Column {
+            Text(text = label2, color = Color.Gray, fontSize = 14.sp)
+            Spacer(modifier = Modifier.height(4.dp))
+            if (isTime) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .background(DarkGreen, CircleShape)
+                    )
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text(text = value2, fontWeight = FontWeight.SemiBold, color = Color.Black)
+                }
+            } else {
+                Text(text = value2, fontWeight = FontWeight.SemiBold, color = Color.Black)
+            }
         }
     }
 }
