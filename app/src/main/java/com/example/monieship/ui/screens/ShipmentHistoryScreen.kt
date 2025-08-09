@@ -1,5 +1,6 @@
 package com.example.monieship.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,11 +39,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.monieship.R
 import com.example.monieship.ui.component.AppTopBar
 import com.example.monieship.model.ShipmentHistoryItem
 import com.example.monieship.model.ShipmentStatus
@@ -184,11 +187,10 @@ fun ShipmentHistoryCard(item: ShipmentHistoryItem) {
                 }
             }
             Spacer(modifier = Modifier.width(16.dp))
-            Icon(
-                imageVector = Icons.Outlined.Info,
+            Image(
+                painter = painterResource(id = R.drawable.img_delivery_box),
                 contentDescription = "Package",
-                modifier = Modifier.size(50.dp),
-                tint = Color.LightGray.copy(alpha = contentAlpha)
+                modifier = Modifier.size(50.dp)
             )
         }
     }
@@ -206,7 +208,7 @@ fun ShipmentHistoryScreen(onBackClick: ()-> Unit) {
             ShipmentHistoryItem("1", ShipmentStatus.InProgress, "Arriving today!", "Your delivery, #NEJ20089934122231 from Atlanta, is arriving today!", "$1400 USD", "Sep 20,2023"),
             ShipmentHistoryItem("2", ShipmentStatus.Pending, "Arriving today!", "Your delivery, #NEJ20089934122231 from Atlanta, is arriving today!", "$650 USD", "Sep 20,2023"),
             ShipmentHistoryItem("3", ShipmentStatus.Pending, "Arriving today!", "Your delivery, #NEJ20089934122231 from Atlanta, is arriving today!", "$650 USD", "Sep 20,2023"),
-            ShipmentHistoryItem("4", ShipmentStatus.Loading, "Arriving today!", "Your delivery, #NEJ20089934122231 from Atlanta, is arriving today!", "$230 USD", "Sep 20,2023", isEnabled = false),
+            ShipmentHistoryItem("4", ShipmentStatus.Loading, "Arriving today!", "Your delivery, #NEJ20089934122231 from Atlanta, is arriving today!", "$230 USD", "Sep 20,2023"),
         )
     }
 
